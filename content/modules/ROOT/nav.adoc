@@ -2,9 +2,9 @@
 * xref:index.adoc[Introduction]
 
 * xref:module-01-intro.adoc[Virtual Machine Management ]
+** xref:module-01-intro.adoc#create_project[Create a New Project]
 ** xref:module-01-intro.adoc#virt_perspective[Switch to the Virtualization Perspective]
 ** xref:module-01-intro.adoc#explore_virt[Exploring OpenShift Virtualization]
-** xref:module-01-intro.adoc#create_project[Create a New Project]
 ** xref:module-01-intro.adoc#create_vm[Create a Linux Virtual Machine]
 ** xref:module-01-intro.adoc#admin_vms[Administering Virtual Machines]
 ** xref:module-01-intro.adoc#vm_state[Controlling Virtual Machine State]

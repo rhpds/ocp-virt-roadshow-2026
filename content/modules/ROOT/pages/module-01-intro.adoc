@@ -21,10 +21,10 @@ Your login is available with:
 * *User:* {user}
 * *Password:* {password}
 
-[[virt_perspective]]
-== Switch to the Virtualization Perspective
+[[create_project]]
+== Create a New Project
 
-. When you first log in, you will be placed in the *Developer* perspective, with an introductory prompt. Click the *Skip tour* button to close the window.
+. When you first log in, you will be placed in the *Core Platform* perspective, with an introductory prompt. Click the *Skip tour* button to close the window.
 +
 image::2026_spring/module-01-intro/00_Welcome_Message.png[link=self, window=blank, width=100%]
 
@@ -36,7 +36,10 @@ image::2026_spring/module-01-intro/01_Create_Project.png[link=self, window=blank
 +
 image::2026_spring/module-01-intro/02_Create_Project_Name.png[link=self, window=blank, width=100%]
 +
-IMPORTANT: While the lab guide is designed to be dynamically updated to show your user name correctly, the screenshots are all static images showing *user1*. Please make sure that you name your project after your assigned user for the workshop.
+IMPORTANT: While the lab guide is designed to be dynamically updated to show your user name correctly, the screenshots are all static images showing *user1*. Please make sure that you name your project after your assigned user for the workshop that is reflected in your lab guide text.
+
+[[virt_perspective]]
+== Switch to the Virtualization Perspective
 
 . You will be presented with a view of the OpenShift console inside of your new project. Now it is time to visit the Virtualization view. Click on the *Core platform* dropdown menu, and select the option for *Virtualization* once it appears.
 +
@@ -102,15 +105,15 @@ Reviewing the list of available templates you’ll notice that some have a blue 
 +
 If you were deploying in your own environment where you can customize the options available, you can choose to modify the availability of these boot sources by default, and/or remove these source disks, in favor of creating custom disks for your organization's needs.
 +
-image::2025_spring/module-01-intro/13_Create_VM_Templates.png[link=self, window=blank, width=100%]
+image::2026_spring/module-01-intro/13_Create_VM_Templates.png[link=self, window=blank, width=100%]
 
 . Select the *Fedora VM* tile, and a dialog opens.
 +
-image::2025_spring/module-01-intro/14_Create_VM_Quick.png[link=self, window=blank, width=100%]
+image::2026_spring/module-01-intro/14_Create_VM_Quick.png[link=self, window=blank, width=100%]
 
 . Change the name to *fedora01* and press *Quick create VirtualMachine*.
 +
-image::2025_spring/module-01-intro/15_Create_VM_Quick_Name.png[link=self, window=blank, width=100%]
+image::2026_spring/module-01-intro/15_Create_VM_Quick_Name.png[link=self, window=blank, width=100%]
 
 . We will return to our tree view and see information about our new VM in the virtual machine overview column. Notice also that we now see our *vmexamples-{user}* project listed in the center column as it contains a VM, and that it is highlighted within the project.
 +
@@ -118,7 +121,7 @@ If we watch closely we can see the VM Status switch from *Provisioning* to *Star
 +
 During this time, the storage provider has cloned the template disk so that it can be used by the newly created virtual machine. The amount of time this takes can vary based on the storage provider being used to create the boot disk, and the current load on the system.
 +
-image::2025_spring/module-01-intro/16_Fedora_Running.png[link=self, window=blank, width=100%]
+image::2026_spring/module-01-intro/16_Fedora_Running.png[link=self, window=blank, width=100%]
 
 . Once the virtual machine is running we can do some further exploration of the *Overview* page in the right side column.  
 +
@@ -127,28 +130,29 @@ image::2025_spring/module-01-intro/16_Fedora_Running.png[link=self, window=blank
 * *Snapshots*: This tile gives us information about any existing snapshots, and also has the button to quickly create a snapshot.
 * *Network*: This tile gives us the IP address of the virtual machine on the software-defined network (SDN) and it's internal hostname. If no advanced networks are defined, VMs are automatically attached to the pod network. Later in this lab we will explore advanced networking options, and how to customize connectivity for VMs.
 * *Utilization*: This tile gives us an overview of the resources currently in use by this virtual machine, including CPU, Memory, Storage, and Network throughput.
+* *Storage*: This tile gives us information about the current storage volumes, for this VM in particular the cloudinit disk that was used to boot the VM from the template, and the virtual hard disk we installed the machine to.
 +
-image::2025_spring/module-01-intro/17_Fedora_Details.png[link=self, window=blank, width=100%]
+image::2026_spring/module-01-intro/17_Fedora_Details.png[link=self, window=blank, width=100%]
 
 . After you are done looking at the VM details, click the *Events* tab to see some details of the provisioning process that just took place. If there are any issues with the creation of the VM, they will show up on this tab as well. The following events took place during creation:
 +
-image::2025_spring/module-01-intro/18_Fedora_Events.png[link=self, window=blank, width=100%]
+image::2026_spring/module-01-intro/18_Fedora_Events.png[link=self, window=blank, width=100%]
 +
 * A _DataVolume_ was created. _DataVolumes_ are used to manage the creation of a VM disk, abstracting the clone or import process onto OpenShift native storage during the virtual machine's creation workflow.
-* The new  _VM instance_ Fedora01 has been started.
+* The new  _VM instance_ *fedora01* has been started.
 
 [[admin_vms]]
 == Administering Virtual Machines
 
-Administering and using virtual machines is more than simply creating and customizing their configuration. As the platform administrator, we also need to be able to control the VM states and trigger live migrations so that we can balance resources, perform maintenance tasks, and reconfigure nodes.
+Administering and using virtual machines is more than simply creating and customizing their configuration. As the platform administrator, we need to be able to control the states of the virtual machine, and perform advanced operations such as live migrations between worker nodes so that we can balance resources, perform maintenance tasks, and reconfigure nodes.
 
 . Click the *Configuration* tab, this is the entry point to obtain more information about, and modify the resources of the virtual machine.
 +
-image::2025_spring/module-01-intro/19_VM_Configuration.png[link=self, window=blank, width=100%]
+image::2026_spring/module-01-intro/19_VM_Configuration.png[link=self, window=blank, width=100%]
 +
 It includes seven subtabs:
 +
-image::2025_spring/module-01-intro/20_Configuration_Tab.png[link=self, window=blank, width=100%]
+image::2026_spring/module-01-intro/20_Configuration_Tab.png[link=self, window=blank, width=100%]
 +
 * *Details*: This tab presents all of the physical features of the VM in a single panel. From here you can make edits to various descriptors and basic hardware configurations including modifying the cpu or memory, changing the hostname, attaching passthrough devices, and modifying the boot order.
 * *Storage*: This tab lists the disks attached to the system and allows you to add new disks to the system. If the guest is configured with the agent, it lists the filesystems and the utilization. Here it is possible to attach _ConfigMaps_, _Secrets_, and _Service Accounts_ as extra disks. This is useful when passing configuration data to the application(s) running in the virtual machine.
@@ -162,13 +166,13 @@ image::2025_spring/module-01-intro/20_Configuration_Tab.png[link=self, window=bl
 
 . List the disks associated with the VM by clicking on the *Storage* tab:
 +
-image::2025_spring/module-01-intro/21_Storage_Tab.png[link=self, window=blank, width=100%]
+image::2026_spring/module-01-intro/21_Storage_Tab.png[link=self, window=blank, width=100%]
 +
 In this environment, the default StorageClass, which defines the source and type of storage used for the disk, is called *ocs-external-storagecluster-ceph-rbd*. This storage is the default type provided by OpenShift Data Foundation (ODF) for running virtual machines. Each storage provider has different storage classes that define the characteristics of the storage backing the VM disk.
 
 . Examine the network interfaces attached to the VM by clicking on the *Network* subtab:
 +
-image::2025_spring/module-01-intro/22_Network_Tab.png[link=self, window=blank, width=100%]
+image::2026_spring/module-01-intro/22_Network_Tab.png[link=self, window=blank, width=100%]
 +
 When a VM is quick created, an interface on the *Pod Networking* network of type *masquerade* is created by default. This connects the VM to the SDN and provides egress from the VM to the world outside the OpenShift cluster. Other VMs, and Pods within the cluster, can access the virtual machine using this interface.
 +
@@ -183,22 +187,22 @@ As a user with granted permissions to manage a  Virtualization environment: you 
 
 . In the top right corner you will notice shortcut buttons for running state: stop, restart, pause, and start. As well as a dropdown menu title *Actions*.
 +
-image::2025_spring/module-01-intro/23_VM_State_Actions.png[link=self, window=blank, width=100%]
+image::2026_spring/module-01-intro/23_VM_State_Actions.png[link=self, window=blank, width=100%]
 +
 * *Stop*: Starts a graceful shutdown of the Virtual Machine.
 * *Restart*: This will send a signal to the operating system to reboot the Virtual Machine. Guest integrations are needed for this to work properly.
 * *Pause*: The process is frozen without further access to CPU resources and I/O, but the memory used by the VM at the hypervisor level will stay allocated.
 * *Start*: Starts up a stopped virtual machine. It will be greyed out if the machine is running.
 
-. While the shortcut buttons are handy, you can also access these options and more by clicking on the *Actions* menu and seeing the options available in the drop down list.
+. While the shortcut buttons are handy, you can also access these options and more by clicking on the *Actions* menu under the *Control* menu, and you can also see many other options for interacting with the VM are available in the drop down list.
 +
-image::2025_spring/module-01-intro/24_VM_Actions_Menu.png[link=self, window=blank, width=100%]
+image::2026_spring/module-01-intro/24_VM_Actions_Menu.png[link=self, window=blank, width=100%]
 
 . Press the *Stop* button and wait until the Virtual Machine is in state *Stopped*.
 +
-image::2025_spring/module-01-intro/25_VM_Stopped.png[link=self, window=blank, width=100%]
+image::2026_spring/module-01-intro/25_VM_Stopped.png[link=self, window=blank, width=100%]
 
-. Clicking on *Actions*, the option *Start* appears, and the options *Restart* and *Pause* are greyed out.
+. Clicking on *Actions* and *Control*, the option *Start* appears, and the options *Restart* and *Pause* are greyed out.
 +
 image::2025_spring/module-01-intro/26_VM_Actions_List_Stopped.png[link=self, window=blank, width=100%]
 
@@ -206,14 +210,14 @@ image::2025_spring/module-01-intro/26_VM_Actions_List_Stopped.png[link=self, win
 
 . Using the *Actions* menu, or the shortcut button, press the *Pause* option. The Virtual Machine state will change to *Paused*.
 +
-image::2025_spring/module-01-intro/27_VM_Actions_Paused.png[link=self, window=blank, width=100%]
+image::2026_spring/module-01-intro/27_VM_Actions_Paused.png[link=self, window=blank, width=100%]
 
-. Unpause the Virtual Machine using the *Actions* menu and the option *Unpause*, or by using the shortcut button.
+. Have the Virtual Machine resume operations by using the *Actions -> Control*  menu and the option *Unpause*, or by using the shortcut button.
 
 [[live_migrate]]
 == Live Migrate a Virtual Machine
 
-In this section, we will migrate the VM from one OpenShift node to another without shutting down the VM. Live migration requires *ReadWriteMany* (RWX) storage so that the VM disks can be mounted on both the source and destination nodes at the same time. OpenShift Virtualization, unlike other virtualization solutions that you may be familiar with, does not use monolithic datastores mounted to each cluster member that hold many VM disks for many different VMs. Instead, each VM disk is stored in its own volume that is only mounted when and where it's needed.
+In this section, we will migrate the VM from one OpenShift node to another without shutting down the VM. Live migration requires *ReadWriteMany* (RWX) storage so that the VM disks can be mounted on both the source and destination nodes at the same time. OpenShift Virtualization, unlike other virtualization solutions that you may be familiar with, does not use monolithic datastores mounted to each cluster member that hold many VM disks for many different VMs by default. Instead, it makes use of the Kubernetes CSI paradigm where persistent claims are created for each VM disk needed, and each of those disks are stored in its own volume that is only mounted when and where it's needed.
 
 . To see the physical node that the virtual machine is running on, click on the *Pod* name _virt-launcher-fedora01-uuid_ found under the *General* tile on the *Overview* page.
 +
