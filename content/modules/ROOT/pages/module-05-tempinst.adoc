@@ -464,7 +464,7 @@ image::2026_spring/module-05-tempinst/24_Windows_2k22_Provisioning.png[link=self
 +
 image::2026_spring/module-05-tempinst/25_CD_Import.png[link=self, window=blank, width=100%]
 
-. After a few moments, the virtual machine will start, and the status will change to *Running*. Click  to the *Console* tab to view the autoattend installation process:
+. After a few moments, the virtual machine will enter the *Starting* state, and the status will change to *Running*. When you see this, click  to the *Console* tab and press the *Enter* key when prompted to boot to CD. Watch the unattended installation process complete.
 +
 image::2026_spring/module-05-tempinst/26_Windows_2k22_Console.png[link=self, window=blank, width=100%]
 
@@ -473,6 +473,8 @@ image::2026_spring/module-05-tempinst/26_Windows_2k22_Console.png[link=self, win
 image::2026_spring/module-05-tempinst/27_Stop_Button.png[link=self, window=blank, width=100%]
 
 . With the machine powered down we want to make a clone of the root volume that we can use for future Windows template-based installs, without having to run through the customization process each time.
++
+NOTE: Having a dedicated clone of the original installation disk to use for future deployments is helpful so that the original disk does not get accidentally deleted if the machine it is connected to does.
 
 . On the left-side menu, click on *Storage* and then *PersistentVolumeClaims* to see a list of PVCs available in the *vmexamples-{user}* namespace. 
 
@@ -483,19 +485,17 @@ image::2026_spring/module-05-tempinst/28_Storage_PVC.png[link=self, window=blank
 . On the menu that pops up, fill in the following options, then click the *Clone* button:
 * *Name*: windows-2k22-sysprep-template
 * *Access mode*:  Shared access (RWX) 
-* *StorageClass*: ocs-external-storagecluster-ceph-rbd-immediate 
+* *StorageClass*: ocs-external-storagecluster-ceph-rbd
 +
 image::2026_spring/module-05-tempinst/29_Clone_Menu.png[link=self, window=blank, width=100%]
 
 . Once this is saved, you can use it to quickly create Windows VMs in the future.
 
-. Return to the *Catalog* menu item, and use this cloned PVC as a boot source for quick-creating new virtual machines by selecting the option for *PVC (clone PVC)* as the *Disk source*, and selecting the *Windows-2k22-Sysprep-Template* PVC as the *PVC name* to clone, and click the *Customize VirtualMachine* button to configure boot mode *BIOS* instead *UEFI*.
+. Return to the *Virtualization -> Catalog* menu item, and use this cloned PVC as a boot source for quick-creating new virtual machines by selecting the option for *PVC (clone PVC)* as the *Disk source*, and selecting the *Windows-2k22-Sysprep-Template* PVC as the *PVC name* to clone, and click the *Customize VirtualMachine* button to configure boot mode *BIOS* instead *UEFI*.
 +
 image::2026_spring/module-05-tempinst/30_Windows_Template.png[link=self, window=blank, width=100%]
-
-. Configure BIOS and press *Create VirtualMachine*
 +
-image::2026_spring/module-05-tempinst/31_Windows_Template_BIOS.png[link=self, window=blank, width=100%]
+image::2026_spring/module-05-tempinst/31_Windows_Clone_PVC.png[link=self, window=blank, width=100%]
 
 . In a few moments the new Windows Server 2019 virtual machine will boot up from our cloned PVC.
 +
@@ -516,9 +516,9 @@ image::2026_spring/module-05-tempinst/33_Left_Menu_Catalog.png[link=self, window
 +
 image::2026_spring/module-05-tempinst/34_Volume_Boot.png[link=self, window=blank, width=100%]
 
-. Click on the *rhel9* boot volume to select it as the volume type to boot from. Selecting it will be denoted by a small vertical blue line to the left of the image name and the name itself being changed to a bold font.
+. Click on the *rhel10* boot volume to select it as the volume type to boot from. Selecting it will be denoted by the line being changed to a bold font.
 +
-image::2026_spring/module-05-tempinst/35_Select_RHEL9.png[link=self, window=blank, width=100%]
+image::2026_spring/module-05-tempinst/35_Select_RHEL10.png[link=self, window=blank, width=100%]
 
 . Next you can select the instance type you would like to use. There are Red Hat provided instance types by default, or you can create your own for your specific use case. If you hover over a provided instance type you can see a description of its intended use.
 +
@@ -527,9 +527,11 @@ image::2026_spring/module-05-tempinst/36_Select_InstanceType.png[link=self, wind
 * The Red Hat provided instance types are intended for the following uses:
 ** *N series*: Designed for network intensive DPDK workloads like VNFs.
 ** *O series*: Specialized general purpose instance type with memory overcommit preconfigured.
+** *M series*: Designed for memory intensive workloads.
+** *RT series*: Designed for realtime virtualization use cases.
+** *D series*: Designed to be used with dedicated or pinned CPU workloads.
 ** *CX series*: Designed for compute intensive workloads by requesting additional dedicated CPUs for additional function offload.
 ** *U series*: The most general purpose or "universal" instance type.
-** *M series*: Designed for memory intensive workloads.
 
 . Click on the *U series* tile to see a dropdown list of defined resources for general instance types. The default option here is *medium: 1 CPUs, 4 GiB Memory*. Select it. Again selection will be indicated by a blue line, and a bolding of the font for the instance type.
 +
@@ -548,9 +550,9 @@ image::2026_spring/module-05-tempinst/39_VM_Overview.png[link=self, window=blank
 
 To save resources for the next lab, please stop any VMs that you created in this module.
 
-. Navigate to *Virtualization* perspective in the left-side menu and then click on *Virtualmachines*.
-. Each project that you have access to that is hosting VM workloads will be listed in the center column treeview. (At a minimum you should expand projects *vmimported-{user}* and *vmexamples-{user}* to check virtual machine status.)
-. If any VMs are showing a status of *Running*, highlight the VM in the center tree column, and select the *Stop* button or option from the *Actions* dropdown menu..
+. Click on *Virtualization -> VirtualMachines*.
+. Each project that you have access to that is hosting VM workloads will be listed in the center column treeview. (At a minimum you should expand the projects *vmexamples-{user}* and *vmimported-{user}* to check virtual machine status.)
+. If any VMs are showing a status of *Running*, highlight the VM in the center tree column, and select the *Stop* button or option from the *Actions* dropdown menu.
 
 Now all VMs should be in *Stopped* state.
 
