@@ -4,15 +4,13 @@
 
 This section of our lab is dedicated to the Day-2 operations that many administrators would need to perform when working with virtual machines in their OpenShift Virtualization environment. We will make use of the understanding we have developed throughout this roadshow of how VMs operate in an OpenShift environment, and use those skills to complete the tasks in this section. In this particular case, we are going to work with the three virtual machines that we imported from VMware vSphere earlier in this roadshow, and we are going to make some minor configuration changes to enable the applications hosted on those servers to be accessed as they now run in OpenShift Virtualization. To accomplish this, we will expose our applications using the service/route method that is the default when making use of the OpenShift SDN pod network so that the application is reachable from outside of the cluster. Doing so provides a more modernized approach to virtual machine management by directly exposing the applications that reside on the VMs.
 
-IMPORTANT: If you have not completed the module *Migrating Existing Virtual Machines*, it is recommended that you do that module first. If you have not completed it, or if the migration process is still pending, you can complete this section by using the pre-existing virtual machines that have been staged for you for you in the *vmimported-{user}* project. Please skip to the appropriate section below based on if you are working with xref:module-08-workingvms.adoc#imported_vms[MTV-imported VMs] or with xref:module08-working_vms.adoc#service_route_staged[Staged VMs].
+IMPORTANT: If you have not completed the module *Migrating Existing Virtual Machines*, it is recommended that you do that module first. If you have not completed it, or if the migration process is still pending, you can complete this section by using the pre-existing virtual machines that have been staged for you for you in the *vmimported-{user}* project. Please skip to the appropriate section below based on if you are working with xref:module-07-workingvms.adoc#service_route_imported[MTV-imported VMs] or with xref:module07-working_vms.adoc#service_route_staged[Staged VMs].
 
 
 [[service_route_imported]]
 == Exposing an Application with a Service/Route - MTV-Imported VMs
 
-By default, virtual machines are connected to the SDN, which is a convenient and easy way to give them access to the rest of the network. However, it can be challenging for the virtual machines, and other pods in the OpenShift cluster, to find and connect to the virtualized applications. To solve this, we will use a *Service* to balance connections across the two Windows-based web servers, and create a DNS entry for each service discovery, then create a *Route* to allow external clients to access the application hosted within the virtual machines.
-
-IMPORTANT: If you have not completed the module *Migrating Existing Virtual Machines*, it is recommended that you do that module first. If you have not completed it, or the migration process is still pending, you can use pre-existing virtual machines that have been prepared for you, which are available in the *vmimported-{user}* project. If you are using these pre-imported virtual machines, please replace all instances of the *vmexamples-{user}* namespace with *vmimported-{user}* in the examples below.
+As we mentioned earlier, by default, virtual machines are connected to the SDN, which is a convenient and easy way to give them access to the rest of the network. However, it can be challenging for the virtual machines, and other pods in the OpenShift cluster, to find and connect to the virtualized applications. To solve this, we will use a *Service* to balance connections across the two Windows-based web servers, and create a DNS entry for each service discovery, then create a *Route* to allow external clients to access the application hosted within the virtual machines.
 
 === Introduction to Services
 
@@ -29,11 +27,9 @@ To begin, we'll add labels to the virtual machines by modifying their definition
 
 === Label the Virtual Machines
 
-. Click on *VirtualMachines* in the left-side column, and *start* your three imported virtual machines if they are not already running. You can verify this easily by sorting by the *Status* column in the right-side tree view.
+. Click on *Virtualization -> VirtualMachines* in the left-side menu, click on the *vmexamples-{user}* project and *Start* your three imported virtual machines: *database-{user}, winweb01-{user}, and winweb02-{user}*, if they are not already running. You can verify this easily by sorting by the *Status* column in the right-side tree view.
 +
-image::2025_spring/module-08-workingvms/11_Imported_VMs_List.png[link=self, window=blank, width=100%]
-+
-NOTE: Ensure you select the correct project, *vmexamples-{user}* if you completed the *Migrating Existing Virtual Machines* module or *vmimported-{user}* if you did not.
+image::2026_spring/module-07-workingvms/01_Imported_VMs_List.png[link=self, window=blank, width=100%]
 
 . Select to the *winweb01-{user}* VM and navigate to the *YAML* tab.
 . Find the *spec:* section and under the *template.metadata* add the following to the *labels* section:
@@ -45,10 +41,11 @@ env: webapp
 +
 IMPORTANT: Make sure to get the indentation exactly right - just like in the screenshot below.
 +
-image::2025_spring/module-08-workingvms/12_Imported_VMs_YAML.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/02_Imported_VMs_YAML.png[link=self, window=blank, width=100%]
 
+. Click the *Save* button, and you will be prompted that the VM has been updated to a new version number.
 . *Repeat* the process for the VM *winweb02-{user}*.
-. Ensure that both the *winweb01-{user}* and *winweb02-{user}* virtual machines are rebooted after the configuration change.
+. After completing the configuration change, reboot both *winweb01-{user}* and *winweb02-{user}*.
 +
 NOTE: Ensure the VMs are properly working by accessing to the console tab of each VM.
 
@@ -56,7 +53,7 @@ NOTE: Ensure the VMs are properly working by accessing to the console tab of eac
 
 . In the left-side menu expand *Networking* and click on *Services*. On the screen that loads, click the *Create Service* button in the corner.
 +
-image::2025_spring/module-08-workingvms/13_Navigate_Service.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/03_Navigate_Service.png[link=self, window=blank, width=100%]
 
 . Replace the YAML with the following definition
 +
@@ -76,18 +73,16 @@ spec:
     targetPort: 80
 ----
 +
-IMPORTANT: Ensure the *namespace* with your virtual machines, *vmexamples-{user}* or *vmimported-{user}*, is the one used in the Service YAML.
-+
-image::2025_spring/module-08-workingvms/14_Service_YAML.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/04_Service_YAML.png[link=self, window=blank, width=100%]
 
 . Click the *Create* button at the bottom. You will get a notification that the YAML has been saved.
 . From the details page for the newly created *webapp* Service, locate *Pod selector* link and click it.
 +
-image::2025_spring/module-08-workingvms/15_Imported_VMs_PodSelector.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/05_Imported_VMs_PodSelector.png[link=self, window=blank, width=100%]
 
 . Verify the two Windows VMs are properly identified and targeted by the Service.
 +
-image::2025_spring/module-08-workingvms/16_Imported_VMs_Pods.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/06_Imported_VMs_Pods.png[link=self, window=blank, width=100%]
 
 === Create the Route
 
@@ -95,9 +90,9 @@ Now the Windows IIS servers are accessible from within the OpenShift cluster. Ot
 
 . Under *Networking* now click on the *Routes* option in the left navigation menu.  Click the *Create Route* button in the center of the screen.
 +
-image::2025_spring/module-08-workingvms/17_Route_Navigation.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/07_Route_Navigation.png[link=self, window=blank, width=100%]
 
-. Fill the form using the information below, scroll to the bottom and click the *Create* when done.
+. Fill the form using the information below, scroll to the bottom and click the *Create* button when done.
 +
 .. *Name*: *route-webapp*
 .. *Service*: *webapp*
@@ -106,19 +101,20 @@ image::2025_spring/module-08-workingvms/17_Route_Navigation.png[link=self, windo
 .. *TLS termination*: *Edge*
 .. *Insecure traffic*: *Redirect*
 +
-image::2025_spring/module-08-workingvms/18_Create_Route.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/08_Create_Route.png[link=self, window=blank, width=100%]
 
 . Navigate to the address shown in *Location* field
 +
-image::2025_spring/module-08-workingvms/19_Route_Access.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/09_Route_Access.png[link=self, window=blank, width=100%]
 
-. When the page loads, you will see an error, something must be wrong. This is because the Windows web servers are not currently able to connect to the database VM after it's migration.
+. When the page loads, you will see an error, it's not working as expected so something must be wrong.
 +
-image::2025_spring/module-08-workingvms/20_WebApp_Error.png[link=self, window=blank, width=100%]
-+
-NOTE: To address our connectivity issue, we will need to create a service for the database VM so that it can be accessed by the web servers.
+image::2026_spring/module-07-workingvms/10_WebApp_Error.png[link=self, window=blank, width=100%]
 
-. Once again, navigate to *Networking* -> *Services* and press *Create Service*. Replace the YAML with the following definition:
+
+. To address our connectivity issue, we will need to create a service for the *database-{user}* VM as well so that it can be accessed by the web servers.
+
+. Once again, navigate to *Networking* -> *Services* and press the *Create Service* button. Replace the YAML with the following definition:
 +
 [source,yaml,role=execute,subs="attributes"]
 ----
@@ -136,22 +132,30 @@ spec:
     targetPort: 3306
 ----
 +
-image::2025_spring/module-08-workingvms/21_Database_YAML.png[link=self, window=blank, width=100%]
-+
-IMPORTANT: Ensure the namespace with your virtual machines, *vmexamples-{user}* or *vmimported-{user}* is the one used in the Service YAML.
-+
+image::2026_spring/module-07-workingvms/11_Database_YAML.png[link=self, window=blank, width=100%]
+
+
 . When the YAML is pasted, click the *Create* button.
-. Reload the webapp URL in your browser and expect to get the proper result of a working migrated web application.
+. Reload the WebApp URL in your browser and expect to get the proper result of a working migrated web application.
 +
-image::2025_spring/module-08-workingvms/22_WebApp_Success.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/12_WebApp_Success.png[link=self, window=blank, width=100%]
+
+. Refresh the screen a couple of times, you should see which webserver is responding, and that the count of user accesses rises with each refresh.
+. Return to your OpenShift console, and click on *Virtualization -> VirtualMachines* and shut down the web server that is handling your requests.
++
+image::2026_spring/module-07-workingvms/13_WinWeb01_Shutdown.png[link=self, window=blank, width=100%]
+
+. Return to your tab with the open WebApp URL and refresh the screen. You should see the remaining web server start returning requests, and the count continue to rise with each refresh. Configuring the service to load balance between two virtual web servers is shown to be successful.
++
+image::2026_spring/module-07-workingvms/14_WinWeb02_Online.png[link=self, window=blank, width=100%]
++
+NOTE: While this is a simple example, keep in mind that there are a number of ways to configure load balancing services between virtual machines in OpenShift to meet the needs of your application. 
 
 
 [[service_route_staged]]
 == Exposing an Application with a Service/Route - Staged VMs
 
-By default, virtual machines are connected to the SDN, which is a convenient and easy way to give them access to the rest of the network. However, it can be challenging for the virtual machines, and other pods in the OpenShift cluster, to find and connect to the virtualized applications. To solve this, we will use a *Service* to balance connections across the two Windows-based web servers, and create a DNS entry for each service discovery, then create a *Route* to allow external clients to access the application hosted within the virtual machines.
-
-IMPORTANT: If you have not completed the module *Migrating Existing Virtual Machines*, it is recommended that you do that module first. If you have not completed it, or the migration process is still pending, you can use pre-existing virtual machines that have been prepared for you, which are available in the *vmimported-{user}* project. If you are using these pre-imported virtual machines, please replace all instances of the *vmexamples-{user}* namespace with *vmimported-{user}* in the examples below.
+As we mentioned earlier, by default, virtual machines are connected to the SDN, which is a convenient and easy way to give them access to the rest of the network. However, it can be challenging for the virtual machines, and other pods in the OpenShift cluster, to find and connect to the virtualized applications. To solve this, we will use a *Service* to balance connections across the two Windows-based web servers, and create a DNS entry for each service discovery, then create a *Route* to allow external clients to access the application hosted within the virtual machines.
 
 === Introduction to Services
 
@@ -168,11 +172,9 @@ To begin, we'll add labels to the virtual machines by modifying their definition
 
 === Label the Virtual Machines
 
-. Click on *VirtualMachines* in the left-side column, and *start* your three imported virtual machines if they are not already running. You can verify this easily by sorting by the *Status* column in the right-side tree view.
+. Click on *Virtualization -> VirtualMachines* in the left-side menu, click on the *vmimported-{user}* project and *Start* your three imported virtual machines: *database, winweb01, and winweb02*. You can verify this easily by sorting by the *Status* column in the right-side tree view.
 +
-image::2025_spring/module-08-workingvms/11_Imported_VMs_List.png[link=self, window=blank, width=100%]
-+
-NOTE: Ensure you select the correct project, *vmexamples-{user}* if you completed the *Migrating Existing Virtual Machines* module or *vmimported-{user}* if you did not.
+image::2026_spring/module-07-workingvms/15_Staged_VMs_List.png[link=self, window=blank, width=100%]
 
 . Select to the *winweb01-{user}* VM and navigate to the *YAML* tab.
 . Find the *spec:* section and under the *template.metadata* add the following to the *labels* section:
@@ -184,10 +186,11 @@ env: webapp
 +
 IMPORTANT: Make sure to get the indentation exactly right - just like in the screenshot below.
 +
-image::2025_spring/module-08-workingvms/12_Imported_VMs_YAML.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/16_Staged_VMs_YAML.png[link=self, window=blank, width=100%]
 
+. Click the *Save* button, and you will be prompted that the VM has been updated to a new version number.
 . *Repeat* the process for the VM *winweb02-{user}*.
-. Ensure that both the *winweb01-{user}* and *winweb02-{user}* virtual machines are rebooted after the configuration change.
+. After completing the configuration change, reboot both *winweb01-{user}* and *winweb02-{user}*.
 +
 NOTE: Ensure the VMs are properly working by accessing to the console tab of each VM.
 
@@ -195,7 +198,7 @@ NOTE: Ensure the VMs are properly working by accessing to the console tab of eac
 
 . In the left-side menu expand *Networking* and click on *Services*. On the screen that loads, click the *Create Service* button in the corner.
 +
-image::2025_spring/module-08-workingvms/13_Navigate_Service.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/17_Navigate_Service.png[link=self, window=blank, width=100%]
 
 . Replace the YAML with the following definition
 +
@@ -215,18 +218,16 @@ spec:
     targetPort: 80
 ----
 +
-IMPORTANT: Ensure the *namespace* with your virtual machines, *vmexamples-{user}* or *vmimported-{user}*, is the one used in the Service YAML.
-+
-image::2025_spring/module-08-workingvms/14_Service_YAML.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/18_Service_YAML.png[link=self, window=blank, width=100%]
 
 . Click the *Create* button at the bottom. You will get a notification that the YAML has been saved.
 . From the details page for the newly created *webapp* Service, locate *Pod selector* link and click it.
 +
-image::2025_spring/module-08-workingvms/15_Imported_VMs_PodSelector.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/19_Imported_VMs_PodSelector.png[link=self, window=blank, width=100%]
 
 . Verify the two Windows VMs are properly identified and targeted by the Service.
 +
-image::2025_spring/module-08-workingvms/16_Imported_VMs_Pods.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/20_Imported_VMs_Pods.png[link=self, window=blank, width=100%]
 
 === Create the Route
 
@@ -234,9 +235,9 @@ Now the Windows IIS servers are accessible from within the OpenShift cluster. Ot
 
 . Under *Networking* now click on the *Routes* option in the left navigation menu.  Click the *Create Route* button in the center of the screen.
 +
-image::2025_spring/module-08-workingvms/17_Route_Navigation.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/21_Route_Navigation.png[link=self, window=blank, width=100%]
 
-. Fill the form using the information below, scroll to the bottom and click the *Create* when done.
+. Fill the form using the information below, scroll to the bottom and click the *Create* button when done.
 +
 .. *Name*: *route-webapp*
 .. *Service*: *webapp*
@@ -245,19 +246,20 @@ image::2025_spring/module-08-workingvms/17_Route_Navigation.png[link=self, windo
 .. *TLS termination*: *Edge*
 .. *Insecure traffic*: *Redirect*
 +
-image::2025_spring/module-08-workingvms/18_Create_Route.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/22_Create_Route.png[link=self, window=blank, width=100%]
 
 . Navigate to the address shown in *Location* field
 +
-image::2025_spring/module-08-workingvms/19_Route_Access.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/23_Route_Access.png[link=self, window=blank, width=100%]
 
-. When the page loads, you will see an error, something must be wrong. This is because the Windows web servers are not currently able to connect to the database VM after it's migration.
+. When the page loads, you will see an error, it's not working as expected so something must be wrong.
 +
-image::2025_spring/module-08-workingvms/20_WebApp_Error.png[link=self, window=blank, width=100%]
-+
-NOTE: To address our connectivity issue, we will need to create a service for the database VM so that it can be accessed by the web servers.
+image::2026_spring/module-07-workingvms/24_WebApp_Error.png[link=self, window=blank, width=100%]
 
-. Once again, navigate to *Networking* -> *Services* and press *Create Service*. Replace the YAML with the following definition:
+
+. To address our connectivity issue, we will need to create a service for the *database-{user}* VM as well so that it can be accessed by the web servers.
+
+. Once again, navigate to *Networking* -> *Services* and press the *Create Service* button. Replace the YAML with the following definition:
 +
 [source,yaml,role=execute,subs="attributes"]
 ----
@@ -275,14 +277,24 @@ spec:
     targetPort: 3306
 ----
 +
-image::2025_spring/module-08-workingvms/21_Database_YAML.png[link=self, window=blank, width=100%]
-+
-IMPORTANT: Ensure the namespace with your virtual machines, *vmexamples-{user}* or *vmimported-{user}* is the one used in the Service YAML.
-+
+image::2026_spring/module-07-workingvms/25_Database_YAML.png[link=self, window=blank, width=100%]
+
+
 . When the YAML is pasted, click the *Create* button.
-. Reload the webapp URL in your browser and expect to get the proper result of a working migrated web application.
+. Reload the WebApp URL in your browser and expect to get the proper result of a working migrated web application.
 +
-image::2025_spring/module-08-workingvms/22_WebApp_Success.png[link=self, window=blank, width=100%]
+image::2026_spring/module-07-workingvms/26_WebApp_Success.png[link=self, window=blank, width=100%]
+
+. Refresh the screen a couple of times, you should see which webserver is responding, and that the count of user accesses rises with each refresh.
+. Return to your OpenShift console, and click on *Virtualization -> VirtualMachines* and shut down the web server that is handling your requests.
++
+image::2026_spring/module-07-workingvms/27_WinWeb01_Shutdown.png[link=self, window=blank, width=100%]
+
+. Return to your tab with the open WebApp URL and refresh the screen. You should see the remaining web server start returning requests, and the count continue to rise with each refresh. Configuring the service to load balance between two virtual web servers is shown to be successful.
++
+image::2026_spring/module-07-workingvms/28_WinWeb02_Online.png[link=self, window=blank, width=100%]
++
+NOTE: While this is a simple example, keep in mind that there are a number of ways to configure load balancing services between virtual machines in OpenShift to meet the needs of your application. 
 
 
 == Summary
