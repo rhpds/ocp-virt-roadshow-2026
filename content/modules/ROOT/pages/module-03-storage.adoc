@@ -42,7 +42,7 @@ image::2026_spring/module-03-storage/02_Fedora01_PVC_Details.png[link=self, wind
 [[managing_snapshots]]
 == Managing Snapshots
 
-OpenShift Virtualization relies on the CSI storage provider's snapshot capability to create disk snapshots for the virtual machine, which can be taken "online" while the VM is running, or "offline" while the VM is powered off. If the KVM integrations package (qemu-tools) is installed on the VM, you will also have the option of automatically quiescing the guest operating system (quiescing ensures that the snapshot of the disk represents a consistent state of the guest file systems, e.g., buffers are flushed and the journal is consistent).
+OpenShift Virtualization relies on the CSI storage provider's snapshot capability to create disk snapshots for the virtual machine, which can be taken "online" while the VM is running, or "offline" while the VM is powered off. If the KVM integrations package (qemu-guest-agent) is installed on the VM, you will also have the option of automatically quiescing the guest operating system (quiescing ensures that the snapshot of the disk represents a consistent state of the guest file systems, e.g., buffers are flushed and the journal is consistent).
 
 Since disk snapshots are dependent on the storage implementation, abstracted by the CSI, both the performance impact and capacity used will depend on the storage provider. Work with your storage vendor to determine how the system will manage PVC snapshots and the impact they may or may not have on your expected performance.
 

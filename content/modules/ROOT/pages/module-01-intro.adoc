@@ -242,11 +242,11 @@ NOTE: The multiuser nature of this lab environment has RBAC permissions configur
 +
 image::2026_spring/module-01-intro/31_VM_Migrating.png[link=self, window=blank, width=100%]
 
-. When the migration is complete the VM will return to the *Running* status, but it will be living on a new node. Let's click on our _virt-launcher-fedora01-uuid_ pod name to verify.
+. When the migration is complete the VM will return to the *Running* status, but it will be running  on a new node. Let's click on our _virt-launcher-fedora01-uuid_ pod name to verify.
 +
 image::2026_spring/module-01-intro/32_Migrated_Status.png[link=self, window=blank, width=100%]
 
-. We can now see that the virtual machine is living on a new node, in the image _worker-cluster-5dktk-3_, and that the pod itself now resides in a new pod with a new unique ID as the live migration process transfers the VM instance to a new pod on a new worker node nondisruptively.
+. We can now see that the virtual machine is running on a new node, in the image _worker-cluster-5dktk-3_, and that the pod itself now resides in a new pod with a new unique ID as the live migration process transfers the VM instance to a new pod on a new worker node nondisruptively.
 +
 image::2026_spring/module-01-intro/33_Pod_Details_Node_Migrated.png[link=self, window=blank, width=100%]
 
