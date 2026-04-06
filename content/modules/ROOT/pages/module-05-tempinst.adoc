@@ -59,6 +59,8 @@ image::2026_spring/module-05-tempinst/05_Clone_Details.png[link=self, window=bla
 . A new window will pop out where you can edit the amount of CPU and Memory. For our custom template set the value of CPUs to 2, and Memory to 4 GiB, and click the *Save* button.
 +
 image::2026_spring/module-05-tempinst/06_Edit_CPU_Mem.png[link=self, window=blank, width=100%]
++
+NOTE: There is a UI bug in CNV 4.21.1 that prevents the template from being edited at this stage. It has been reported and will be fixed soon. 
 
 . Next click on the *Scripts* tab at the top, and in the section called *Cloud-init* click the *Edit* button.
 +
