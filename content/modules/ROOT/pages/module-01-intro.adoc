@@ -203,7 +203,7 @@ image::2026_spring/module-01-intro/25_VM_Stopped.png[link=self, window=blank, wi
 
 . Clicking on *Actions* and *Control*, the option *Start* appears, and the options *Restart* and *Pause* are greyed out.
 +
-image::2025_spring/module-01-intro/26_VM_Actions_List_Stopped.png[link=self, window=blank, width=100%]
+image::2026_spring/module-01-intro/26_VM_Actions_List_Stopped.png[link=self, window=blank, width=100%]
 
 . Click *Start*, and wait for the *Running* status.
 

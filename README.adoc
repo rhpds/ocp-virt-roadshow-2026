@@ -39,12 +39,12 @@ These are the *seven* main sections that will be covered:
 
 == Version Information
 
-This edition of the  OpenShift Virtualization Roadshow has been developed using the following software versions:
+This edition of the OpenShift Virtualization Roadshow has been developed using the following software versions:
 
-* Red Hat OpenShift 4.21.5
+* Red Hat OpenShift 4.21.8
 * Red Hat OpenShift Virtualization 4.21.1
-* Red Hat OpenShift Data Foundation 4.20.7
-* Red Hat Openshift API for Data Protection (OADP) 1.5.5
-* Red Hat Migration Toolkit for Virtual Machines 2.11
+* Red Hat OpenShift Data Foundation 4.21.1
+* Red Hat OpenShift API for Data Protection (OADP) 1.5.5
+* Red Hat Migration Toolkit for Virtual Machines 2.11.2
 
-(Accurate as of March 20, 2026)
+(Accurate as of April 9, 2026)

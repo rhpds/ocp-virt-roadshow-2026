@@ -40,7 +40,7 @@ image::2026_spring/module-06-networking/04_NodeNetworkConfigurationPolicy_Info.p
 
 NOTE: As the *NodeNetworkConfigurationPolicy* performs configurations at the node-level you cannot modify these options with your current user account. As a result, it prompts you to contact your administrator.
 
-. To see how this bridge was created, you can switch to *YAML* to see the definition. As an administrator, you could create your a similar bridge with the yaml snippet below.:
+. To see how this bridge was created, you can switch to *YAML* to see the definition. As an administrator, you could create your a similar bridge with the yaml snippet below.
 +
 image::2026_spring/module-06-networking/05_NodeNetworkConfigurationPolicy_YAML.png[link=self, window=blank, width=100%]
 
@@ -82,7 +82,7 @@ NOTE: A network attachment definition instructs Openshift to use an existing net
 image::2026_spring/module-06-networking/06_NetworkAttachDefinition_Create.png[link=self, window=blank, width=100%]
 +
 
-IMPORTANT: Ensure that you are in your vmexamples-{user} project when creating the network attachment definitions.
+IMPORTANT: Ensure that you are in your vmexamples-{user} project when creating the network attachment definition.
 
 . Complete the form for the *vmexamples-{user}* project as follows, then click *Create network attachment definition*:
 * *Name*: flatnetwork
@@ -91,10 +91,7 @@ IMPORTANT: Ensure that you are in your vmexamples-{user} project when creating t
 +
 image::2026_spring/module-06-networking/07_NetworkAttachDefinition_Create_Form.png[link=self, window=blank, width=100%]
 +
-
-NOTE: The form above has an input for *VLAN Tag Number*, which is used when connecting to a network that needs to have a VLAN tag assigned. This lab uses an untagged network, so no VLAN number is required here.
-+
-NOTE: A single OVS or Linux bridge on the host can have many different VLANs associated with it. In this scenario, you only need to create a Network Attachment Definition for each one, not a separate host interface and bridge.
+NOTE: A single OVS or Linux bridge on the host can have many different VLANs associated with it. You do this by creating a Network Attachment Definition for each VLAN desired instead of creating separate host interfaces and bridges. Our lab uses an untagged network, so no VLAN number is required for this exercise.
 
 . Examine the details of the network attachment definition. Because this was created in the *vmexamples-{user}* project, it will not be available in other projects.
 +
@@ -110,13 +107,13 @@ image::2026_spring/module-06-networking/09_VM_Network_Tab.png[link=self, window=
 +
 image::2026_spring/module-06-networking/10_VM_Network_Attach.png[link=self, window=blank, width=100%]
 +
-NOTE: Because this is a bridge connecting to the external network, we don't need to rely on any OpenShift features or capabilities to enable access, such as masquerade (NAT) for the virtual machines using the network. As a result, *type* should be *Bridge* here.
+NOTE: Because this is a bridge connecting to the external network, we don't need to rely on any OpenShift features or capabilities to enable access, such as masquerade (NAT) for the virtual machines using the network. As a result, the *type* should be set to *Bridge* here.
 
 . Use the *Actions -> Control* menu or the *Start* button to start the VM, and switch to the *Console* tab to watch it boot up. 
 +
 image::2026_spring/module-06-networking/11_VM_Network_Startup.png[]
 +
-The *enp2s0* interface obtains an IP address from the flat network (*192.168.64.0/18*). That network has a DHCP server providing IPs to that network. 
+The *enp2s0* interface obtains an IP address from the flat network (*192.168.64.0/18*) that we connected to, as there is a DHCP server there providing addresses.
 +
 image::2026_spring/module-06-networking/12_VM_Network_Console.png[link=self, window=blank, width=100%]
 
@@ -167,9 +164,9 @@ You must consider the following limitations before implementing a primary UDN:
 
 === Working with User Defined Networks
 
-You must create the namespace and network before creating pods that can access the UDN. Assigning a namespace with pods to a new network or creating a UDN in an existing namespace will not be accepted by OVN-Kubernetes.
+Before you can work with User Defined Networks, you must create a dedicated namespace with appropriate labeling, before creating the UDN or the virtual machines that can access the UDN. Assigning a namespace with VMs to a new network or creating a UDN in an existing namespace will not be accepted by OVN-Kubernetes.
 
-This task has to be performed by a cluster administrator. You have assigned a namespace called *vmexamples-{user}-udn* with the proper label (*k8s.ovn.org/primary-user-defined-network*)
+This task has to be performed by a cluster administrator. In our lab, you have been assigned a namespace called *vmexamples-{user}-udn* with the proper label (*k8s.ovn.org/primary-user-defined-network*)
 
 . Navigate to *Networking* and then click on *UserDefinedNetworks* and ensure you select the project *vmexamples-{user}-udn*, and click the *Create UserDefinedNetwork* button.
 +

@@ -60,8 +60,7 @@ image::2026_spring/module-05-tempinst/05_Clone_Details.png[link=self, window=bla
 +
 image::2026_spring/module-05-tempinst/06_Edit_CPU_Mem.png[link=self, window=blank, width=100%]
 +
-NOTE: There is a UI bug in CNV 4.21.1 that prevents the template from being edited at this stage. It has been reported and will be fixed soon. 
-
+NOTE: There is a UI bug in OpenShift Virtulization 4.21 that prevents the template from being edited at this stage. It has been reported and will be fixed soon. 
 . Next click on the *Scripts* tab at the top, and in the section called *Cloud-init* click the *Edit* button.
 +
 image::2026_spring/module-05-tempinst/09_Scripts_CloudInit.png[link=self, window=blank, width=100%]
@@ -93,6 +92,8 @@ image::2026_spring/module-05-tempinst/11_User_Templates.png[link=self, window=bl
 . Click on the tile and you will be prompted with the VM startup screen. Click the *Quick create VirtualMachine* button.
 +
 image::2026_spring/module-05-tempinst/12_Quick_Create_Template.png[link=self, window=blank, width=100%]
++
+NOTE: Until the previously mentioned bug is fixed you can modify CPU and Memory on this screen prior to deploying the VM.
 
 . When the virtual machine boots you can see on the *Overview* page that it was created from our template, and has the additional resources we defined. We just need to verify that it installed *MariaDB* for us.
 +
@@ -467,6 +468,8 @@ image::2026_spring/module-05-tempinst/24_Windows_2k22_Provisioning.png[link=self
 image::2026_spring/module-05-tempinst/25_CD_Import.png[link=self, window=blank, width=100%]
 
 . After a few moments, the virtual machine will enter the *Starting* state, and the status will change to *Running*. When you see this, click  to the *Console* tab and press the *Enter* key when prompted to boot to CD. Watch the unattended installation process complete.
++
+NOTE: If you miss your chance to 'Press Enter to Boot to CD/DVD', you can retry by force-stopping the machine and starting it back up. The restart button does not work for this process as it skips the initial boot stage.
 +
 image::2026_spring/module-05-tempinst/26_Windows_2k22_Console.png[link=self, window=blank, width=100%]
 
