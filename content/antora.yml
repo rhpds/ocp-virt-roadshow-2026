@@ -2,6 +2,7 @@
 name: modules
 title: Experience OpenShift Virtualization
 version: master
+start_page: index.adoc
 nav:
 - modules/ROOT/nav.adoc
 
