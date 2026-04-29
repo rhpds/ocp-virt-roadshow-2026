@@ -44,7 +44,7 @@ IMPORTANT: While the lab guide is designed to be dynamically updated to show you
 +
 image::2026_spring/module-01-intro/03_Switch_Virt_View.png[link=self, window=blank, width=100%]
  
-. You will be greated by an introductory prompt welcoming you to OpenShift Virtualization. Click the check box for *Do not show this again* and the window will disappear.
+. You will be greeted by an introductory prompt welcoming you to OpenShift Virtualization. Click the check box for *Do not show this again* and the window will disappear.
 +
 image::2026_spring/module-01-intro/04_Welcome_Virt.png[link=self, window=blank, width=100%]
 
@@ -71,7 +71,7 @@ image::2026_spring/module-01-intro/07_Left_Menu.png[link=self, window=blank, wid
 +
 image::2026_spring/module-01-intro/08_Project_Tree.png[link=self, window=blank, width=100%]
 
-. In the virtual machine overview column, it will list place us in the Project *mtv-{user}* by default, as it's sorted alphabetically. This project doesn't cureently have any virtual machines in it, nor will it in the future. This view will change when you highlight a specific project or virtual machine in the center column. Lets try that now.
+. In the virtual machine overview column, it will list place us in the Project *mtv-{user}* by default, as it's sorted alphabetically. This project doesn't currently have any virtual machines in it, nor will it in the future. This view will change when you highlight a specific project or virtual machine in the center column. Lets try that now.
 +
 image::2026_spring/module-01-intro/09_VM_List.png[link=self, window=blank, width=100%]
 
@@ -100,7 +100,7 @@ NOTE: VMs can also be created from an InstanceType wizard as well as created by 
 
 . You will be taken to the *Catalog* screen, where a number of tiles will appear showing the available pre-defined VM templates.
 +
-Reviewing the list of available templates you’ll notice that some have a blue badge which indicates _Source available_. These are templates which are using automatically downloaded and stored template source disks. 
+Reviewing the list of available templates you'll notice that some have a blue badge which indicates _Source available_. These are templates which are using automatically downloaded and stored template source disks. 
 +
 If you were deploying in your own environment where you can customize the options available, you can choose to modify the availability of these boot sources by default, and/or remove these source disks, in favor of creating custom disks for your organization's needs.
 +
