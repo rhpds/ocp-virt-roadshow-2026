@@ -499,7 +499,7 @@ image::2026_spring/module-05-tempinst/30_Windows_Template.png[link=self, window=
 +
 image::2026_spring/module-05-tempinst/31_Windows_Clone_PVC.png[link=self, window=blank, width=100%]
 
-. In a few moments the new Windows Server 2019 virtual machine will boot up from our cloned PVC.
+. In a few moments the new Windows Server 2022 virtual machine will boot up from our cloned PVC.
 +
 image::2026_spring/module-05-tempinst/32_Windows_Template_Running.png[link=self, window=blank, width=100%]
 

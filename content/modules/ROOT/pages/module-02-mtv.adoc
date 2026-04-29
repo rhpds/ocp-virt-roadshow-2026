@@ -9,7 +9,7 @@ This portion of our lab uses the https://docs.redhat.com/en/documentation/migrat
 
 NOTE: The migration toolkit has already been deployed to your cluster using the Operator available in OperatorHub.
 
-Documentation for how to install and configure the Operator can be found https://docs.redhat.com/en/documentation/migration_toolkit_for_virtualization/2.0/html/installing_and_using_the_migration_toolkit_for_virtualization/installing-mtv_mtv#installing-the-operator_mtv[here^].
+Documentation for how to install and configure the Operator can be found https://docs.redhat.com/en/documentation/migration_toolkit_for_virtualization/2.11/html/installing_and_using_the_migration_toolkit_for_virtualization/installing-mtv_mtv#installing-the-operator_mtv[here^].
 
 If you would like to learn more about how to configure the Migration Toolkit for Virtualization for your own needs, please see the documentation at the following links for:
 
@@ -123,7 +123,7 @@ image::2026_spring/module-02-mtv/08_VMware_Source_Provider.png[link=self, window
 +
 image::2026_spring/module-02-mtv/09_VM_List.png[link=self, window=blank, width=100%]
 
-. On the next screen you will be tasked with providing networking details for your migration plan. Select the radio button to *Use new network map*, then from the Source network dropdown select *segment-migration-to-ocpvirt* and for the Target network dropdown select the *Default network*. Finally, fill in the Network map name with *default-network-map* and click the *Next* button.
+. On the next screen you will be tasked with providing networking details for your migration plan. Select the radio button to *Use new network map*, then from the Source network dropdown select *segment-migrating-to-ocpvirt* and for the Target network dropdown select the *Default network*. Finally, fill in the Network map name with *default-network-map* and click the *Next* button.
 +
 image::2026_spring/module-02-mtv/10a_Mig_Plan_Net.png[link=self, window=blank, width=100%]
 
