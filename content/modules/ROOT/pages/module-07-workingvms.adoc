@@ -1,4 +1,4 @@
-=  Working with Virtual Machines and Applications
+= Working with Virtual Machines and Applications
 
 == Introduction
 

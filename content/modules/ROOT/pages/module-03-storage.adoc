@@ -31,7 +31,7 @@ image::2026_spring/module-03-storage/01_PVC_List.png[link=self, window=blank, wi
 . Click on the *fedora01* PVC and you will be presented with a screen that shows additional details about the storage volume backing the VM.
 +
 . Notice the following information about the persistent volume claim:
-.. The PVC is currently bound successfuly
+.. The PVC is currently bound successfully
 .. The PVC has a requested capacity and size of 30GiB
 .. The Access mode of the PVC is ReadWriteMany (RWX)
 .. The Volume mode of the PVC is Block
@@ -73,7 +73,7 @@ image::2026_spring/module-03-storage/05_Snapshot_Menu.png[link=self, window=blan
 +
 image::2026_spring/module-03-storage/06_VM_Snapshot_Dialog.png[link=self, window=blank, width=100%]
 +
-NOTE: There is a warning about the *cloudinitdisk* not being included in the snapshot. This is expected and happens because it is an ephemeral disk only used for the inital boot of the VM.
+NOTE: There is a warning about the *cloudinitdisk* not being included in the snapshot. This is expected and happens because it is an ephemeral disk only used for the initial boot of the VM.
 
 . A name will be auto-generated for the Snapshot. Press *Save* and wait until the *status* shows as *Succeeded*.
 +
@@ -161,4 +161,4 @@ image::2026_spring/module-03-storage/22_Fedora02_Running.png[link=self, window=b
 
 == Summary
 
-In this section of our lab we explored the storage options that are available when managing virtual machines. We also performed several VM management functions that are dependant on the storage provisioned for the virtual machine, including taking snapshots of VMs to perform basic restorations, and the cloning of VMs to be used in other projects or to help streamline future development.
+In this section of our lab we explored the storage options that are available when managing virtual machines. We also performed several VM management functions that are dependent on the storage provisioned for the virtual machine, including taking snapshots of VMs to perform basic restorations, and the cloning of VMs to be used in other projects or to help streamline future development.

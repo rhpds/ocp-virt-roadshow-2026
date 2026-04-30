@@ -1,4 +1,4 @@
-=  Network Management for Virtual Machines
+= Network Management for Virtual Machines
 
 == Introduction
 
@@ -18,7 +18,7 @@ NOTE: The OpenShift environment has already been configured with a Linux Bridge 
 
 The *Kubernetes NMState Operator* provides a Kubernetes API for performing state-driven network configuration across the OpenShift cluster's nodes. It provides users with functionality to configure various network interface types, DNS, and routing on cluster nodes. Additionally, the daemons on the cluster nodes periodically report on the state of each node's network interfaces to the API server.
 
-. In the left-side menu, click on *Networking* and then *Node network configuration* to review the current configuration. You can explore the screen at your leisure, notice that controlplane nodes are in trapezoidal shapes, and worker ndoes are in rectangular shapes.
+. In the left-side menu, click on *Networking* and then *Node network configuration* to review the current configuration. You can explore the screen at your leisure, notice that controlplane nodes are in trapezoidal shapes, and worker nodes are in rectangular shapes.
 +
 image::2026_spring/module-06-networking/01_NodeNetworkState_Graph.png[link=self, window=blank, width=100%]
 
@@ -111,7 +111,7 @@ NOTE: Because this is a bridge connecting to the external network, we don't need
 
 . Use the *Actions -> Control* menu or the *Start* button to start the VM, and switch to the *Console* tab to watch it boot up. 
 +
-image::2026_spring/module-06-networking/11_VM_Network_Startup.png[]
+image::2026_spring/module-06-networking/11_VM_Network_Startup.png[link=self, window=blank, width=100%]
 +
 The *enp2s0* interface obtains an IP address from the flat network (*192.168.64.0/18*) that we connected to, as there is a DHCP server there providing addresses.
 +
@@ -201,7 +201,7 @@ image::2026_spring/module-06-networking/20a_Fedora_InstanceType.png[link=self, w
 +
 image::2026_spring/module-06-networking/20b_Create_VM.png[link=self, window=blank, width=100%]
 
-. Switch to the *VirtualMachines* and watch at the VM is created. Once it is up and runing, review the newly created virtual machine. In the *Overview* tab, the *Network* tile will show that we are attached to the default network, but it will have an IP address assigned from the UserDefinedNetwork.
+. Switch to the *VirtualMachines* and watch at the VM is created. Once it is up and running, review the newly created virtual machine. In the *Overview* tab, the *Network* tile will show that we are attached to the default network, but it will have an IP address assigned from the UserDefinedNetwork.
 +
 image::2026_spring/module-06-networking/21_UDN_Network_Tile.png[link=self, window=blank, width=100%]
 
@@ -211,7 +211,7 @@ image::2026_spring/module-06-networking/21_UDN_Network_Tile.png[link=self, windo
 image::2026_spring/module-06-networking/22_UDN_Fedora_Console.png[link=self, window=blank, width=100%]
 +
 * The VM has assigned a IP from the subnet defined
-* The VM automatically gets the gateway configuration from the DCHP server.
+* The VM automatically gets the gateway configuration from the DHCP server.
 * The VM has access to internet using the User Defined Network.
 
 

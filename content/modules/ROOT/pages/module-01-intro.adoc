@@ -124,7 +124,7 @@ image::2026_spring/module-01-intro/16_Fedora_Running.png[link=self, window=blank
 
 . Once the virtual machine is running we can do some further exploration of the *Overview* page in the right side column.  
 +
-* *Details*: This tile shows us information about our VM, including it's name, status, creation time, OS, virtual resources, and the template from which it was created. It also contains a minature VNC terminal, and the ability to launch a fullscreen web console.
+* *Details*: This tile shows us information about our VM, including it's name, status, creation time, OS, virtual resources, and the template from which it was created. It also contains a miniature VNC terminal, and the ability to launch a fullscreen web console.
 * *General*: This tile shows us information specific to OpenShift, including the Namespace (Project), instance name, and Kubernetes pod where the guest is running.
 * *Snapshots*: This tile gives us information about any existing snapshots, and also has the button to quickly create a snapshot.
 * *Network*: This tile gives us the IP address of the virtual machine on the software-defined network (SDN) and it's internal hostname. If no advanced networks are defined, VMs are automatically attached to the pod network. Later in this lab we will explore advanced networking options, and how to customize connectivity for VMs.

@@ -1,4 +1,4 @@
-=  Backup and Recovery for Virtual Machines
+= Backup and Recovery for Virtual Machines
 
 == Introduction
 
